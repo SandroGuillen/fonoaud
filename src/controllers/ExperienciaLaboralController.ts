@@ -28,7 +28,11 @@ export class ExperienciaLaboralController {
         const result = await this.experienciaLaboralRepository.getAll();
         res.status(200).json(result);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 
   async updateExperienciaLaboral(req: Request, res: Response) {
@@ -56,19 +60,23 @@ export class ExperienciaLaboralController {
         });
         res.status(200).json({ msg: "eliminado con éxito" });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 
   async saveExperienciaLaboral(req: Request, res: Response) {
     try {
       const experienciaLaboral: ExperienciaLaboral =
         req.body.experienciaLaboralData;
-      if (true) {
-        res.status(400).json({ error: "experienciaLaboral ya existe" });
-      } else {
-        await this.experienciaLaboralRepository.insertOne(experienciaLaboral);
-        res.status(201).json(experienciaLaboral);
-      }
-    } catch (error) {}
+
+      await this.experienciaLaboralRepository.insertOne(experienciaLaboral);
+      res.status(201).json(experienciaLaboral);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 }

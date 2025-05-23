@@ -21,7 +21,10 @@ export class ValoracionController {
         const result = await this.valoracionRepository.getAll();
         res.status(200).json(result);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 
   async updateValoracion(req: Request, res: Response) {
@@ -32,7 +35,10 @@ export class ValoracionController {
         valoracionData
       );
       res.status(200).json({ msg: "Actualizado con éxito" });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 
   async deleteValoracion(req: Request, res: Response) {
@@ -43,7 +49,10 @@ export class ValoracionController {
         await this.valoracionRepository.deleteOne({ _id: valoracionObjectId });
         res.status(200).json({ msg: "eliminado con éxito" });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 
   async saveValoracion(req: Request, res: Response) {
@@ -59,6 +68,9 @@ export class ValoracionController {
         await this.valoracionRepository.insertOne(valoracion);
         res.status(201).json(valoracion);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 }

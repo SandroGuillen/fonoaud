@@ -9,25 +9,30 @@ export default (experienciaLaboralRepository: ExperienciaLaboralRepository) => {
     experienciaLaboralRepository
   );
   router.delete(
-    "/eliminar-ExperienciaLaboral",
+    "/",
     experienciaLaboralController.deleteExperienciaLaboral.bind(
       experienciaLaboralController
     )
   );
   router.get(
-    "/registrar-ExperienciaLaboral",
+    "/",
     experienciaLaboralController.getExperienciaLaboral.bind(
       experienciaLaboralController
     )
   );
   router.put(
-    "/actualizar-ExperienciaLaboral",
+    "/",
     experienciaLaboralController.updateExperienciaLaboral.bind(
       experienciaLaboralController
     )
   );
 
-  router.post("", (req, res) => {});
+  router.post(
+    "/",
+    experienciaLaboralController.saveExperienciaLaboral.bind(
+      experienciaLaboralController
+    )
+  );
 
   return router;
 };

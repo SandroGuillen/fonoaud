@@ -9,19 +9,22 @@ export default (AgendarCitaRepository: AgendarCitaRepository) => {
     AgendarCitaRepository
   );
   router.delete(
-    "/eliminar-cita",
+    "/",
     agendarCitaController.deleteAgendarCita.bind(AgendarCitaController)
   );
   router.get(
-    "/registrar-cita",
+    "/",
     agendarCitaController.getAgendarCita.bind(AgendarCitaController)
   );
   router.put(
-    "/actualizar-cita",
+    "/",
     agendarCitaController.updateAgendarCita.bind(AgendarCitaController)
   );
 
-  router.post("", (req, res) => {});
+  router.post(
+    "/",
+    agendarCitaController.saveAgendarCita.bind(AgendarCitaController)
+  );
 
   return router;
 };

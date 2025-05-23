@@ -22,7 +22,9 @@ export class AgendarCitaController {
         const result = await this.agendarCitaRepository.getAll();
         res.status(200).json(result);
       }
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 
   async updateAgendarCita(req: Request, res: Response) {
@@ -33,7 +35,9 @@ export class AgendarCitaController {
         agendarCitaData
       );
       res.status(200).json({ msg: "Actualizado con éxito" });
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 
   async deleteAgendarCita(req: Request, res: Response) {
@@ -47,7 +51,9 @@ export class AgendarCitaController {
         });
         res.status(200).json({ msg: "eliminado con éxito" });
       }
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 
   async saveAgendarCita(req: Request, res: Response) {
@@ -65,6 +71,11 @@ export class AgendarCitaController {
         await this.agendarCitaRepository.insertOne(agendarCita);
         res.status(201).json(agendarCita);
       }
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json({
+        error: "Error al guardar la cita agendada",
+        details: error instanceof Error ? error.message : error,
+      });
+    }
   }
 }

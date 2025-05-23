@@ -9,25 +9,22 @@ export default (representanteRepository: RepresentanteRepository) => {
     representanteRepository
   );
   router.delete(
-    "/eliminar-Representante",
-    representanteController.deleteRepresentante.bind(
-      representanteController
-    )
+    "/",
+    representanteController.deleteRepresentante.bind(representanteController)
   );
   router.get(
-    "/registrar-Representante",
-    representanteController.getRepresentante.bind(
-      representanteController
-    )
+    "/",
+    representanteController.getRepresentante.bind(representanteController)
   );
   router.put(
-    "/actualizar-Representante",
-    representanteController.updateRepresentante.bind(
-      representanteController
-    )
+    "/",
+    representanteController.updateRepresentante.bind(representanteController)
   );
 
-  router.post("", (req, res) => {});
+  router.post(
+    "/",
+    representanteController.updateRepresentante.bind(representanteController)
+  );
 
   return router;
 };

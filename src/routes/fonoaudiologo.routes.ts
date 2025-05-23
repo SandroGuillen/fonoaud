@@ -9,23 +9,22 @@ export default (FonoaudiologoRepository: FonoaudiologoRepository) => {
     FonoaudiologoRepository
   );
   router.delete(
-    "/eliminar-Fonoaudiologo",
-    fonoaudiologoController.deleteFonoaudiologo.bind(
-      fonoaudiologoController
-    )
+    "/",
+    fonoaudiologoController.deleteFonoaudiologo.bind(fonoaudiologoController)
   );
   router.get(
-    "/registrar-Fonoaudiologo",
+    "/",
     fonoaudiologoController.getFonoaudiologo.bind(fonoaudiologoController)
   );
   router.put(
-    "/actualizar-Fonoaudiologo",
-    fonoaudiologoController.updateFonoaudiologo.bind(
-      fonoaudiologoController
-    )
+    "/",
+    fonoaudiologoController.updateFonoaudiologo.bind(fonoaudiologoController)
   );
 
-  router.post("", (req, res) => {});
+  router.post(
+    "/",
+    fonoaudiologoController.updateFonoaudiologo.bind(fonoaudiologoController)
+  );
 
   return router;
 };

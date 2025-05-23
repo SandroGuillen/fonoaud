@@ -9,15 +9,15 @@ export default (departamentoRepository: DepartamentoRepository) => {
     departamentoRepository
   );
   router.delete(
-    "/eliminar-departamento",
+    "/",
     departamentoController.deleteDepartamento.bind(departamentoController)
   );
   router.get(
-    "/registrar-departamento",
+    "/",
     departamentoController.getDepartamento.bind(departamentoController)
   );
   router.put(
-    "/actualizar-departamento",
+    "/",
     departamentoController.updateDepartamento.bind(departamentoController)
   );
 

@@ -9,19 +9,19 @@ export default (formacionAcademicaRepository: FormacionAcademicaRepository) => {
     formacionAcademicaRepository
   );
   router.delete(
-    "/eliminar-FormacionAcademica",
+    "/",
     formacionAcademicaController.deleteFormacionAcademica.bind(
       formacionAcademicaController
     )
   );
   router.get(
-    "/registrar-FormacionAcademica",
+    "/",
     formacionAcademicaController.getFormacionAcademica.bind(
       formacionAcademicaController
     )
   );
   router.put(
-    "/actualizar-FormacionAcademica",
+    "/",
     formacionAcademicaController.updateFormacionAcademica.bind(
       formacionAcademicaController
     )
