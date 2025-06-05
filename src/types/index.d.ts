@@ -18,6 +18,7 @@ export interface Usuario {
   contrasena: string;
   username: string;
   rol: string;
+  idPersona: number;
   idPersona_FK: ObjectId | null;
 }
 
@@ -25,11 +26,12 @@ export interface Escolaridad {
   nombre: string;
 }
 
-export interface Paciente extends Persona {
+export interface Paciente {
+  identificacion: number;
   idRepresentante_FK: ObjectId;
-  discapacidad: string;
-  idFonoaudiologo_FK: ObjectId | undefined;
-  escolaridad_FK: ObjectId;
+  discapacidad?: string;
+  idFonoaudiologo_FK?: ObjectId;
+  escolaridad_FK?: ObjectId;
 }
 
 export interface Municipio {
@@ -46,23 +48,26 @@ export interface Pais {
   nombre: string;
 }
 
-export interface Representante extends Persona {
+export interface Representante {
   parentesco: string;
   ocupacion: string;
   estadoCivil: string;
 }
 
 export interface AgendarCita {
-  idPaciente_FK: ObjectId;
-  idRepresentante_FK: ObjectId;
+  idPaciente_FK: number;
+  idRepresentante_FK?: ObjectId;
   idFonoaudiologo_FK: ObjectId;
+  motivo: string;
+  alergias: string;
   fechaCita: Date;
 }
 
-export interface Fonoaudiologo extends Persona {
+export interface Fonoaudiologo {
   perfil: string;
   idExpLaboral_FK: ObjectId; //llave FK
   idFormacion_FK: ObjectId; //llave FK
+  identificacion: number;
 }
 
 export interface ExperienciaLaboral {

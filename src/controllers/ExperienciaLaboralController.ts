@@ -10,24 +10,16 @@ export class ExperienciaLaboralController {
 
   async getExperienciaLaboral(req: Request, res: Response) {
     try {
-      const { experienciaLaboral_id } = req.query;
+      const filter: Partial<ExperienciaLaboral> = req.query;
 
-      if (experienciaLaboral_id && typeof experienciaLaboral_id == "string") {
-        const experienciaLaboralObjectId = ObjectId.createFromHexString(
-          experienciaLaboral_id
+      if (filter.fonoAudio_FK) {
+        filter.fonoAudio_FK = ObjectId.createFromHexString(
+          filter.fonoAudio_FK.toString()
         );
-        const result = await this.experienciaLaboralRepository.getOne({
-          _id: experienciaLaboralObjectId,
-        });
-        if (result) res.status(200).json(result);
-        else
-          res
-            .status(404)
-            .json({ error: "No se encontró el experienciaLaboral" });
-      } else {
-        const result = await this.experienciaLaboralRepository.getAll();
-        res.status(200).json(result);
       }
+
+      const result = await this.experienciaLaboralRepository.getAll(filter);
+      res.status(200).json(result);
     } catch (error) {
       console.log(error);
 

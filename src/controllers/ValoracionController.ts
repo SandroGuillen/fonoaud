@@ -8,19 +8,9 @@ export class ValoracionController {
 
   async getValoracion(req: Request, res: Response) {
     try {
-      const { valoracion_id } = req.query;
-
-      if (valoracion_id && typeof valoracion_id == "string") {
-        const valoracionObjectId = ObjectId.createFromHexString(valoracion_id);
-        const result = await this.valoracionRepository.getOne({
-          _id: valoracionObjectId,
-        });
-        if (result) res.status(200).json(result);
-        else res.status(404).json({ error: "No se encontró el valoracion" });
-      } else {
-        const result = await this.valoracionRepository.getAll();
-        res.status(200).json(result);
-      }
+      const filter: Partial<Valoracion> = req.query;
+      const result = await this.valoracionRepository.getAll(filter);
+      res.status(200).json(result);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Error interno del servidor" });

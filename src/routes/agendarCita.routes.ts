@@ -8,22 +8,30 @@ export default (AgendarCitaRepository: AgendarCitaRepository) => {
   const agendarCitaController = new AgendarCitaController(
     AgendarCitaRepository
   );
-  router.delete(
-    "/",
-    agendarCitaController.deleteAgendarCita.bind(AgendarCitaController)
+
+  router.get(
+    "/all",
+    agendarCitaController.getAgendarCitasPaginadas.bind(agendarCitaController)
   );
+
+  router.delete(
+    "/:agendarCita_id",
+    agendarCitaController.deleteAgendarCita.bind(agendarCitaController)
+  );
+
   router.get(
     "/",
-    agendarCitaController.getAgendarCita.bind(AgendarCitaController)
+    agendarCitaController.getAgendarCita.bind(agendarCitaController)
   );
+
   router.put(
     "/",
-    agendarCitaController.updateAgendarCita.bind(AgendarCitaController)
+    agendarCitaController.updateAgendarCita.bind(agendarCitaController)
   );
 
   router.post(
     "/",
-    agendarCitaController.saveAgendarCita.bind(AgendarCitaController)
+    agendarCitaController.saveAgendarCita.bind(agendarCitaController)
   );
 
   return router;

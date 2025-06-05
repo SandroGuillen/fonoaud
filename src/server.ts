@@ -32,9 +32,9 @@ const app = express();
   app.use(cors({ origin: "*" }));
   app.use(express.json());
 
-  app.use("/auth", authRoutes(userRepostory));
-  app.use("/pacientes", pacienteRoutes(pacienteRepository));
-  app.use("/agendar-cita", agendarCitaRoutes(agendarCitaRepository));
+  app.use("/auth", authRoutes(userRepostory, personaRepository));
+  app.use("/pacientes", pacienteRoutes(pacienteRepository, personaRepository));
+  app.use("/citas", agendarCitaRoutes(agendarCitaRepository));
   app.use("/fonoaudiologo", fonoaudiologoRoutes(fonoaudiologoRepository));
   app.use("/personas", personasRoutes(personaRepository));
   app.use("/valoracion", valoracionRoutes(valoracionRepository));

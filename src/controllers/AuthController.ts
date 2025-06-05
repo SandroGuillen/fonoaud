@@ -2,9 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import { UsuarioRepository } from "../repositories/usuarioRepository";
 import { Usuario } from "../types";
 import { ObjectId } from "mongodb";
+import { PersonaRepository } from "../repositories/personaRepository";
 
 export class AuthController {
-  constructor(private usuarioRepository: UsuarioRepository) {}
+  constructor(
+    private usuarioRepository: UsuarioRepository,
+    private personaRepository: PersonaRepository
+  ) {}
 
   async signIn(req: Request, res: Response) {
     try {
@@ -13,8 +17,11 @@ export class AuthController {
       const { username, password } = req.body;
       const user = await this.usuarioRepository.getOne({ username });
 
-      if (password == user?.contrasena) {
-        res.status(200).json({ user });
+      if (user && password == user.contrasena) {
+        const persona = await this.personaRepository.getOne({
+          identificacion: user.idPersona,
+        });
+        res.status(200).json({ ...persona, ...user });
       } else {
         res.status(400).json({ error: "Contraseña incorrecta" });
       }

@@ -2,30 +2,45 @@ import { Request, Response } from "express";
 import { PacienteRepository } from "../repositories/pacienteRepository";
 import { ObjectId } from "mongodb";
 import { Paciente } from "../types";
+import { PersonaRepository } from "../repositories/personaRepository";
 
 export class PacienteController {
-  constructor(private pacienteRepository: PacienteRepository) {}
+  constructor(
+    private pacienteRepository: PacienteRepository,
+    private personaRepository: PersonaRepository
+  ) {}
 
   async getPacientes(req: Request, res: Response) {
     try {
-      const { paciente_id } = req.params;
       const filter: any = req.query;
 
-      if (paciente_id && typeof paciente_id == "string") {
-        const pacienteObjectId = ObjectId.createFromHexString(paciente_id);
-        const result = await this.pacienteRepository.getOne({
-          _id: pacienteObjectId,
+      if (filter.idFonoaudiologo_FK) {
+        filter.idFonoaudiologo_FK = ObjectId.createFromHexString(
+          filter.idFonoaudiologo_FK
+        );
+      }
+      const result = await this.pacienteRepository.getAll(filter);
+      res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getPacienteById(req: Request, res: Response) {
+    try {
+      let { identificacion: id } = req.query;
+      if (id && typeof id == "string") {
+        const identificacion = parseInt(id);
+        const paciente = await this.pacienteRepository.getOne({
+          identificacion,
         });
-        if (result) res.status(200).json(result);
-        else res.status(404).json({ error: "No se encontró el paciente" });
-      } else {
-        if (filter.idFonoaudiologo_FK) {
-          filter.idFonoaudiologo_FK = ObjectId.createFromHexString(
-            filter.idFonoaudiologo_FK
-          );
-        }
-        const result = await this.pacienteRepository.getAll(filter);
-        res.status(200).json(result);
+        const persona = await this.personaRepository.getOne({ identificacion });
+        res.status(200).json({
+          data: {
+            ...paciente,
+            ...persona,
+          },
+        });
       }
     } catch (error) {
       console.log(error);
@@ -58,18 +73,19 @@ export class PacienteController {
 
   async savePaciente(req: Request, res: Response) {
     try {
-      const paciente: Paciente = req.body.pacienteData;
+      const paciente: Paciente = req.body;
 
       const pacienteExist = await this.pacienteRepository.getOne({
         identificacion: paciente.identificacion,
       });
-      if (!pacienteExist) {
+      if (pacienteExist) {
         res.status(400).json({ error: "Paciente ya existe" });
       } else {
         await this.pacienteRepository.insertOne(paciente);
         res.status(201).json(paciente);
       }
     } catch (error) {
+      console.log("error en savePaciente");
       console.log(error);
     }
   }
