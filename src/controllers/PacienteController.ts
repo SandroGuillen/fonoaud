@@ -31,6 +31,8 @@ export class PacienteController {
       let { identificacion: id } = req.query;
       if (id && typeof id == "string") {
         const identificacion = parseInt(id);
+        console.log(identificacion);
+
         const paciente = await this.pacienteRepository.getOne({
           identificacion,
         });

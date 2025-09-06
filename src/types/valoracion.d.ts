@@ -1,14 +1,3 @@
-interface DatosGenerales {
-  idFono_FK: ObjectId;
-  idPaciente_FK: ObjectId;
-  idHistoria_FK: ObjectId;
-  fecha: Date;
-  estructuraEstomatognaticas: string;
-  comunicacionLenguaje: string;
-  precesoAlimentacionDeglucion: string;
-  conclusionDiagnostica: string;
-}
-
 interface Antecedentes {
   prenatales: string;
   perinatales: string;
@@ -70,7 +59,9 @@ interface Recomendaciones {
 }
 
 export interface Valoracion {
-  datosGenerales: DatosGenerales;
+  idFono_FK: string;
+  idPaciente_FK: ObjectId;
+  fecha: Date;
   motivoConsulta: string;
   observacionGeneral: string;
   antecedentes: Antecedentes;
@@ -84,4 +75,8 @@ export interface Valoracion {
   conclusionDiagnostica: ConclusionDiagnostica;
   planIntervencion: PlanIntervencion;
   recomendaciones: Recomendaciones;
+  estructuraEstomatognaticas: string;
+  comunicacionLenguaje: string;
+  precesoAlimentacionDeglucion: string;
+  conclusionDiagnostica: string;
 }

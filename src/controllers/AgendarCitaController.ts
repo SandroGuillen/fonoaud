@@ -80,7 +80,7 @@ export class AgendarCitaController {
       const filter: Partial<AgendarCita> = queryParams;
 
       if (filter.idFonoaudiologo_FK) {
-        filter.idFonoaudiologo_FK = ObjectId.createFromHexString(
+        filter.idFonoaudiologo_FK = parseInt(
           filter.idFonoaudiologo_FK.toString()
         );
       }

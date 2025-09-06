@@ -35,9 +35,15 @@ const app = express();
   app.use("/auth", authRoutes(userRepostory, personaRepository));
   app.use("/pacientes", pacienteRoutes(pacienteRepository, personaRepository));
   app.use("/citas", agendarCitaRoutes(agendarCitaRepository));
-  app.use("/fonoaudiologo", fonoaudiologoRoutes(fonoaudiologoRepository));
+  app.use(
+    "/fonoaudiologo",
+    fonoaudiologoRoutes(fonoaudiologoRepository, personaRepository)
+  );
   app.use("/personas", personasRoutes(personaRepository));
-  app.use("/valoracion", valoracionRoutes(valoracionRepository));
+  app.use(
+    "/valoraciones",
+    valoracionRoutes(valoracionRepository, personaRepository)
+  );
 
   app.listen(3000, () => {
     console.log("Corriendo en el puerto 3000");

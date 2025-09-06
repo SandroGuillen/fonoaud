@@ -55,19 +55,25 @@ export interface Representante {
 }
 
 export interface AgendarCita {
-  idPaciente_FK: number;
   idRepresentante_FK?: ObjectId;
-  idFonoaudiologo_FK: ObjectId;
-  motivo: string;
+  idFonoaudiologo_FK: number;
+  idPaciente_FK: number;
   alergias: string;
   fechaCita: Date;
+  motivo: string;
 }
 
 export interface Fonoaudiologo {
-  perfil: string;
   idExpLaboral_FK: ObjectId; //llave FK
   idFormacion_FK: ObjectId; //llave FK
   identificacion: number;
+  especialidad: string;
+  perfil: string;
+  img: string;
+  twiter: string;
+  linkedin: string;
+  facebook: string;
+  instagram: string;
 }
 
 export interface ExperienciaLaboral {

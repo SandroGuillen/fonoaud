@@ -12,8 +12,6 @@ export class AuthController {
 
   async signIn(req: Request, res: Response) {
     try {
-      console.log(req.body);
-
       const { username, password } = req.body;
       const user = await this.usuarioRepository.getOne({ username });
 

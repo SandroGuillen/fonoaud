@@ -1,11 +1,23 @@
 import { Router } from "express";
 import { ValoracionController } from "../controllers/ValoracionController";
 import { ValoracionRepository } from "../repositories/valoracionRepository";
+import { PersonaRepository } from "../repositories/personaRepository";
 
 const router = Router();
 
-export default (valoracionRepository: ValoracionRepository) => {
-  const valoracionController = new ValoracionController(valoracionRepository);
+export default (
+  valoracionRepository: ValoracionRepository,
+  personaRepository: PersonaRepository
+) => {
+  const valoracionController = new ValoracionController(
+    valoracionRepository,
+    personaRepository
+  );
+
+  router.get(
+    "/:id",
+    valoracionController.getValoracionById.bind(valoracionController)
+  );
   router.delete(
     "/",
     valoracionController.deleteValoracion.bind(valoracionController)
@@ -19,8 +31,8 @@ export default (valoracionRepository: ValoracionRepository) => {
     valoracionController.updateValoracion.bind(valoracionController)
   );
 
-  router.get(
-    "/",
+  router.post(
+    "/search",
     valoracionController.getValoracion.bind(valoracionController)
   );
 
